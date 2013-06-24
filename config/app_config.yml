@@ -1,0 +1,15 @@
+development: &default
+  session_secret: '9302405932'
+  site_url: 'http://localhost:3000'
+  site_title: '值得去'
+  site_motto: '探索天下值得去.'
+  site_description: '自由行不再麻烦，去天下最值得去的好地方'
+  show_certification: true
+  show_me_url: 'http://www.zhidequ.com'
+
+test:
+  <<: *default
+
+production:
+  <<: *default
+  site_url: 'http://www.zhidequ.com'
