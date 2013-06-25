@@ -43,7 +43,10 @@
         </div>
         <div>
           <%chapter.plan_intro_sections.where(:section_type => '提示').each do |tip|%>
-            <a href="#" data-toggle="popover" data-content="<%=tip.content%>"><%=tip.title%></a>
+              <a href="#" data-trigger="collapse"><%=tip.title%></a>
+              <div class="bs-docs-tip collapsible hide">
+                <%==m2h tip.content%>
+              </div>
           <%end%>
         </div>
     </section>
