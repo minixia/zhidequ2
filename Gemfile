@@ -2,9 +2,14 @@ source 'https://rubygems.org'
 
 # Project requirements
 gem 'rake'
-gem 'tilt', '~> 1.3.7'
+
 gem 'padrino-core', '~> 0.11'
 gem 'padrino-helpers', '~> 0.11'
+
+#template engine
+gem 'tilt', '~> 1.3.7'
+gem 'haml'
+
 
 # Component requirements
 gem 'bcrypt-ruby', :require => 'bcrypt'
@@ -20,6 +25,8 @@ gem 'sanitize'
 gem 'carrierwave', :require => ['carrierwave', 'carrierwave/orm/activerecord']
 gem 'mini_magick'
 gem 'rest-client'
+#markdown
+gem 'rdiscount'
 
 # Production requirements
 group :production do

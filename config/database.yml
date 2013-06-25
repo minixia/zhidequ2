@@ -1,5 +1,6 @@
 development: &default
   adapter: mysql2
+  encoding: utf8
   database: zhidequ2_dev
   username: zhidequ
   password: myapp

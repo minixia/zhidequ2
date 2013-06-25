@@ -1,3 +1,10 @@
+db_config = YAML::load(File.open(File.expand_path("#{PADRINO_ROOT}/config", __FILE__) + '/database.yml'))
+[:development, :production, :test].each do |env|
+  #hash load from yml's key is string ,but active record need symbol,so convert it
+  config = db_config[env.to_s].inject({}){|cfg,(k,v)| cfg[k.to_sym] = v; cfg}
+  ActiveRecord::Base.configurations[env] = config
+end
+
 # Setup our logger
 ActiveRecord::Base.logger = logger
 
@@ -26,4 +33,4 @@ ActiveRecord::Base.default_timezone = :local
 ActiveRecord::Base.time_zone_aware_attributes = false
 
 # Now we can establish connection with our db.
-ActiveRecord::Base.establish_connection YAML::load(File.open(File.expand_path("#{PADRINO_ROOT}/config", __FILE__) + '/database.yml'))[PADRINO_ENV]
+ActiveRecord::Base.establish_connection ActiveRecord::Base.configurations[PADRINO_ENV.to_sym]

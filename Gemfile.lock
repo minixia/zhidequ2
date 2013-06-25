@@ -34,6 +34,8 @@ GEM
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
     github-markdown (0.5.3)
+    haml (4.0.3)
+      tilt
     http_router (0.11.0)
       rack (>= 1.0.0)
       url_mount (~> 0.2.1)
@@ -79,6 +81,7 @@ GEM
       unicorn (~> 4.6, >= 4.6.2)
     raindrops (0.11.0)
     rake (10.1.0)
+    rdiscount (2.1.6)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     sanitize (2.0.4)
@@ -118,6 +121,7 @@ DEPENDENCIES
   erubis (~> 2.7.0)
   factory_girl
   github-markdown
+  haml
   kgio
   mini_magick
   minitest (~> 2.6.0)
@@ -128,6 +132,7 @@ DEPENDENCIES
   pry-padrino
   rack-test
   rake
+  rdiscount
   rest-client
   sanitize
   second_level_cache!

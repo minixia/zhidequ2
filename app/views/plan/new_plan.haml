@@ -1,0 +1,5 @@
+- form_for @plan, '/plan' do |f|
+    = f.error_messages
+    = f.text_field_block :title, :caption => "标题"
+    = f.text_area_block :summary, :caption => "简介"
+    = f.submit_block "创建", :class => 'button'

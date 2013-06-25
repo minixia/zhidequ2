@@ -44,6 +44,8 @@ end
 # Add your after (RE)load hooks here
 #
 Padrino.after_load do
+  Encoding.default_internal = nil
+  #Haml::Template.options[:encoding] = "utf-8"
 end
 
 # load project config

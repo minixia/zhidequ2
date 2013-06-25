@@ -25,4 +25,11 @@ ZhidequSite.helpers do
     current_account && current_account.commenter? ? true : false
   end
 
+  def m2h(content)
+    if(content.nil?)
+      content == ""
+    end
+    RDiscount.new(content.gsub("\n", "\n\n"), :smart, :autolink, :filter_html).to_html()
+  end
+
 end
