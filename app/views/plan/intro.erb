@@ -5,30 +5,45 @@
   <div class="span2 bs-docs-sidebar">
     <ul class="nav nav-list bs-docs-sidenav">
       <%@intro.plan_intro_chapters.each do |chapter|%>
-      <li><a href="#chapter_<%=chapter.id%>"><i class="icon-chevron-right"></i><%=chapter.title%></a></li>
+        <%city_section = chapter.plan_intro_sections.where(:section_type => ['城市','去程','回程'])[0]%>
+        <li><a href="#chapter_<%=chapter.id%>"><i class="icon-chevron-right"></i>
+          <%=chapter.title%>
+          <%if(city_section)%>
+            [<%=city_section.title%>]
+          <%end%>
+        </a></li>
       <%end%>
     </ul>
   </div>
   <div class="span9">
     <%@intro.plan_intro_chapters.each do |chapter|%>
     <section id="chapter_<%=chapter.id%>">
+        <%city_section = chapter.plan_intro_sections.where(:section_type => '城市')[0]%>
         <div class="page-header">
-            <h2><%=chapter.title%></h2>
+            <h2>
+                <%=chapter.title%>
+            </h2>
+        </div>
+        <%if(city_section)%>
+            <div class="hero-unit">
+              <h4><%= city_section.title %></h4>
+              <p><%==m2h city_section.content%></p>
+            </div>
+        <%end%>
+        <div>
+          <%chapter.plan_intro_sections.where(:section_type => ['行程','去程','回程']).each do |section|%>
+            <h4>
+              <%= section.title %>
+              <%if(!section.duration.blank?)%>
+                  <span style="font-size: 14px;" class="text-info">需时<%= section.duration%></span>
+              <%end%>
+            </h4>
+            <p><%==m2h section.content%></p>
+          <%end%>
         </div>
         <div>
-          <%chapter.plan_intro_sections.each do |section|%>
-              <%if(section.section_type == "行程")%>
-                <h4>
-                  <%= section.title %>
-                  <%if(!section.duration.blank?)%>
-                      <span style="font-size: 14px;" class="text-info">需时<%= section.duration%></span>
-                  <%end%>
-                </h4>
-                  <p><%==m2h section.content%></p>
-              <%end%>
-              <%if(section.section_type == "提示")%>
-                <a href="#" data-toggle="popover" data-content="<%=section.content%>"><%=section.title%></a>
-              <%end%>
+          <%chapter.plan_intro_sections.where(:section_type => '提示').each do |tip|%>
+            <a href="#" data-toggle="popover" data-content="<%=tip.content%>"><%=tip.title%></a>
           <%end%>
         </div>
     </section>

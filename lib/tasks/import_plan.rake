@@ -8,7 +8,7 @@ namespace :import do
     file = "#{PADRINO_ROOT}/#{args[:filename]}"
     puts "=========import plan data from csv_file: #{file}"
     if(Pathname.new(file).file?)
-      m = { "chapter" => 0, "section" => 3, "duration" => 4 ,"content" => 6, "type" => 8} #column mapping
+      m = { "chapter" => 0, "section" => 1, "duration" => 2 ,"content" => 4, "type" => 5} #column mapping
       plan_title = Pathname.new(file).basename(".csv").to_s
       plan = Plan.find_by_title(plan_title)
       if(!plan)

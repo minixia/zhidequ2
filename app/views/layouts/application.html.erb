@@ -42,6 +42,12 @@
   <script src="/js/html5shiv.js"></script>
   <![endif]-->
 
+  <!--[if lte IE 6]>
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap-ie6.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/css/ie.css">
+  <![endif]-->
+
   <script>
       var _hmt = _hmt || [];
   </script>
@@ -79,6 +85,10 @@
 <script src="/js/jquery.unveil.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/bootstro.min.js"></script>
+<!--[if lte IE 6]>
+<!-- bsie js 补丁只在IE6中才执行 -->
+<script type="text/javascript" src="/js/bootstrap-ie.js"></script>
+<![endif]-->
 <script src="/js/google-code-prettify.js"></script>
 
 <script src="/js/jquery.scrollUp.min.js"></script>
