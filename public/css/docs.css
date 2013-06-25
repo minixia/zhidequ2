@@ -792,7 +792,7 @@ form.bs-docs-tip {
 }
 .bs-docs-sidenav > li > a {
     display: block;
-    width: 130px \9;
+    width: 158px \9;
     margin: 0 0 -1px;
     padding: 8px 14px;
     border: 1px solid #e5e5e5;
@@ -857,10 +857,10 @@ form.bs-docs-tip {
         max-width: 970px;
     }
     .bs-docs-sidenav {
-        width: 130px;
+        width: 158px;
     }
     .bs-docs-sidenav > li > a {
-        width: 130px \9; /* Override the previous IE8-9 hack */
+        width: 158px \9; /* Override the previous IE8-9 hack */
     }
 }
 

@@ -5,11 +5,11 @@
   <div class="span2 bs-docs-sidebar">
     <ul class="nav nav-list bs-docs-sidenav">
       <%@intro.plan_intro_chapters.each do |chapter|%>
-        <%city_section = chapter.plan_intro_sections.where(:section_type => ['城市','去程','回程'])[0]%>
+        <%cities = chapter.plan_intro_sections.where(:section_type => ['城市','去程','回程'])%>
         <li><a href="#chapter_<%=chapter.id%>"><i class="icon-chevron-right"></i>
           <%=chapter.title%>
-          <%if(city_section)%>
-            [<%=city_section.title%>]
+          <%if(cities.length > 0)%>
+            [<%cities.each {|city|%><%=city.title%> <%}%>]
           <%end%>
         </a></li>
       <%end%>
@@ -18,16 +18,22 @@
   <div class="span9">
     <%@intro.plan_intro_chapters.each do |chapter|%>
     <section id="chapter_<%=chapter.id%>">
-        <%city_section = chapter.plan_intro_sections.where(:section_type => '城市')[0]%>
+        <%city_sections = chapter.plan_intro_sections.where(:section_type => '城市')%>
         <div class="page-header">
             <h2>
                 <%=chapter.title%>
             </h2>
         </div>
-        <%if(city_section)%>
+        <%if(city_sections.length > 0)%>
             <div class="hero-unit">
-              <h4><%= city_section.title %></h4>
-              <p><%==m2h city_section.content%></p>
+              <h4>
+                <%city_sections.each do |city| %>
+                <%= city.title %>
+                <%end%>
+              </h4>
+              <%city_sections.each do |city| %>
+                <p><%==m2h city.content%></p>
+              <%end%>
             </div>
         <%end%>
         <div>
