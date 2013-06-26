@@ -11,6 +11,7 @@
 -------------------------------------------------- */
 
 body {
+    background: url("../img/body_bg.jpg") repeat scroll left top #DDDCE2;
     position: relative;
     padding-top: 40px;
 }

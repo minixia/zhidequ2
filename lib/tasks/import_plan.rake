@@ -21,6 +21,7 @@ namespace :import do
         plan_intro.plan = plan
         plan_intro.save!
       end
+      pre_chapter = ""
       CSV.foreach(file, :row_sep => "\r\n") {|row|
         chapter_title = row[m["chapter"]]
         chapter = PlanIntroChapter.find_by_title(chapter_title)
@@ -29,12 +30,16 @@ namespace :import do
           chapter.plan_intro = plan_intro
           chapter.save!
         end
-        section = PlanIntroSection.new({:title => row[m["section"]],
-                                        :content => row[m["content"]],
-                                        :section_type => row[m["type"]],
-                                        :duration => row[m["duration"]],
-                                        :plan_intro_chapter => chapter
-                          })
+        if(pre_chapter != chapter_title)
+          chapter.plan_intro_sections.destroy_all
+        end
+        pre_chapter = chapter_title
+        section = PlanIntroSection.new
+        section.title = row[m["section"]]
+        section.content = row[m["content"]]
+        section.section_type = row[m["type"]]
+        section.duration = row[m["duration"]]
+        section.plan_intro_chapter = chapter
         section.save!
       }
     else
