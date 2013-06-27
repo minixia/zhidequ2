@@ -8,7 +8,7 @@ namespace :import do
     file = "#{PADRINO_ROOT}/#{args[:filename]}"
     puts "=========import plan data from csv_file: #{file}"
     if(Pathname.new(file).file?)
-      m = { "chapter" => 0, "section" => 1, "duration" => 2 ,"content" => 4, "type" => 5} #column mapping
+      m = { "chapter" => 0, "section" => 1, "duration" => 2 ,"content" => 4, "type" => 5, "img" => 7} #column mapping
       plan_title = Pathname.new(file).basename(".csv").to_s
       plan = Plan.find_by_title(plan_title)
       if(!plan)
@@ -39,6 +39,9 @@ namespace :import do
         section.content = row[m["content"]]
         section.section_type = row[m["type"]]
         section.duration = row[m["duration"]]
+        if(!row[m["img"]].blank?)
+           section.image_url = "/img/photo/plan_#{plan.id}/#{row[m["img"]]}"
+        end
         section.plan_intro_chapter = chapter
         section.save!
       }

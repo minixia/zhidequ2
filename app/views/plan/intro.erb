@@ -36,17 +36,50 @@
               <%end%>
             </div>
         <%end%>
-        <div>
-          <%chapter.plan_intro_sections.where(:section_type => ['行程','去程','回程']).each do |section|%>
-            <h4>
-              <%= section.title %>
-              <%if(!section.duration.blank?)%>
-                  <span style="font-size: 14px;" class="text-info">需时<%= section.duration%></span>
+        <%i=0%>
+        <%chapter.plan_intro_sections.where(:section_type => ['行程','去程','回程']).each do |section|%>
+        <div class="row">
+            <%if(section && section.image_url.blank?)%>
+              <div class="span9">
+                <%= section.title %>
+                <%if(!section.duration.blank?)%>
+                    <span style="font-size: 14px;" class="text-info">需时<%= section.duration%></span>
+                <%end%>
+                </h4>
+                <p><%==m2h section.content%></p>
+              </div>
+            <%else%>
+              <%if(i%2 == 0)%>
+              <div class="span4">
+                <img src="<%=section.image_url%>">
+              </div>
+              <div class="span4">
+                <h4>
+                  <%= section.title %>
+                  <%if(!section.duration.blank?)%>
+                      <span style="font-size: 14px;" class="text-info">需时<%= section.duration%></span>
+                  <%end%>
+                </h4>
+                <p><%==m2h section.content%></p>
+              </div>
+              <%else%>
+                  <div class="span4">
+                    <h4>
+                      <%= section.title %>
+                      <%if(!section.duration.blank?)%>
+                          <span style="font-size: 14px;" class="text-info">需时<%= section.duration%></span>
+                      <%end%>
+                    </h4>
+                    <p><%==m2h section.content%></p>
+                  </div>
+                  <div class="span4">
+                    <img src="<%=section.image_url%>">
+                  </div>
               <%end%>
-            </h4>
-            <p><%==m2h section.content%></p>
-          <%end%>
-        </div>
+            <%i=i+1%>
+            <%end%>
+            </div>
+        <%end%>
         <div>
           <%chapter.plan_intro_sections.where(:section_type => '提示').each do |tip|%>
               <a href="#" data-trigger="collapse"><%=tip.title%></a>
