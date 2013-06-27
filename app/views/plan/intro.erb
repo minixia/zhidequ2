@@ -22,6 +22,16 @@
         <div class="page-header">
             <h2>
                 <%=chapter.title%>
+              <%chapter.plan_intro_sections.where(:section_type => '提示').each do |tip|%>
+                  <a href="#" data-trigger="collapse" data-target="#tip_<%=tip.id%>">
+                    <small style="right: 0px;">
+                      <%=tip.title%>
+                    </small>
+                  </a>
+                  <div id="tip_<%=tip.id%>" class="bs-docs-tip collapsible hide" style="font-size: 16px;">
+                    <%==m2h tip.content%>
+                  </div>
+              <%end%>
             </h2>
         </div>
         <%if(city_sections.length > 0)%>
@@ -36,58 +46,34 @@
               <%end%>
             </div>
         <%end%>
-        <%i=0%>
         <%chapter.plan_intro_sections.where(:section_type => ['行程','去程','回程']).each do |section|%>
-        <div class="row">
-            <%if(section && section.image_url.blank?)%>
-              <div class="span9">
-                <%= section.title %>
-                <%if(!section.duration.blank?)%>
-                    <span style="font-size: 14px;" class="text-info">需时<%= section.duration%></span>
-                <%end%>
-                </h4>
-                <p><%==m2h section.content%></p>
-              </div>
-            <%else%>
-              <%if(i%2 == 0)%>
-              <div class="span4">
-                <img src="<%=section.image_url%>">
-              </div>
-              <div class="span4">
-                <h4>
-                  <%= section.title %>
-                  <%if(!section.duration.blank?)%>
-                      <span style="font-size: 14px;" class="text-info">需时<%= section.duration%></span>
-                  <%end%>
-                </h4>
-                <p><%==m2h section.content%></p>
-              </div>
-              <%else%>
-                  <div class="span4">
-                    <h4>
-                      <%= section.title %>
-                      <%if(!section.duration.blank?)%>
-                          <span style="font-size: 14px;" class="text-info">需时<%= section.duration%></span>
-                      <%end%>
-                    </h4>
-                    <p><%==m2h section.content%></p>
-                  </div>
-                  <div class="span4">
-                    <img src="<%=section.image_url%>">
-                  </div>
+        <div class="row" >
+          <div class="span9">
+            <h4>
+              <%= section.title %>
+              <%if(!section.duration.blank?)%>
+                  <span style="font-size: 14px;" class="text-info">预计游览时间：<%= section.duration%></span>
               <%end%>
-            <%i=i+1%>
-            <%end%>
+            </h4>
+            <%if(section.image_url && !section.image_url.blank?)%>
+            <div class="image">
+              <img src="<%=section.image_url%>" width="100%">
+              <div class="in_image">
+                <%==m2h section.content%>
+              </div>
             </div>
-        <%end%>
-        <div>
-          <%chapter.plan_intro_sections.where(:section_type => '提示').each do |tip|%>
-              <a href="#" data-trigger="collapse"><%=tip.title%></a>
-              <div class="bs-docs-tip collapsible hide">
-                <%==m2h tip.content%>
+            <%else%>
+              <span><%==m2h section.content%></span>
+            <%end%>
+          </div>
+        </div>
+          <%chapter.plan_intro_sections.where(:section_type => '行程建议', :title => section.title).each do |advice|%>
+              <h5>行程建议：</h5>
+              <div>
+                <p><%==m2h advice.content%></p>
               </div>
           <%end%>
-        </div>
+        <%end%>
     </section>
     <%end%>
   </div>
