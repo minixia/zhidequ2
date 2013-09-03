@@ -6,7 +6,7 @@ GIT
       activesupport (~> 3.2.0)
 
 GEM
-  remote: https://rubygems.org/
+  remote: http://ruby.taobao.org/
   specs:
     activemodel (3.2.12)
       activesupport (= 3.2.12)

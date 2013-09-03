@@ -57,6 +57,30 @@
 </head>
 <body  data-spy="scroll" data-target=".bs-docs-sidebar">
 
+<header class="navbar" role="banner">
+  <div class="container">
+
+    <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </a>
+
+    <a href="/" class="brand">值得去</a>
+
+    <nav class="nav-collapse collapse" role="navigation">
+      <ul class="nav pull-right">
+        <li class="active"><a href="/">首页</a></li>
+        <li><a href="/tour">了解产品</a></li>
+        <li><a href="/pricing">价格方案</a></li>
+        <li><a class="login" data-target="#login-modal" data-toggle="modal" href="#login-modal" role="button" type="button">登录</a></li>
+        <li class="action"><a class="signup" href="#">免费注册</a></li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
 <div class="container">
     <%= yield %>
 </div>

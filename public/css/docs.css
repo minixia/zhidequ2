@@ -28,28 +28,73 @@ h3 code {
 -------------------------------------------------- */
 
 body > .navbar {
+    margin: 0;
     font-size: 13px;
 }
 
 /* Change the docs' brand */
 body > .navbar .brand {
-    padding-right: 0;
-    padding-left: 0;
-    margin-left: 20px;
-    float: right;
-    font-weight: bold;
-    color: #000;
-    text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.125);
-    -webkit-transition: all .2s linear;
-    -moz-transition: all .2s linear;
-    transition: all .2s linear;
+    text-align: center;
+    font-size: 26px;
+    line-height: 39px;
+    font-size: 2.6rem;
+    line-height: 3.9000000000000004rem;
+    font-weight: 400;
+    padding: 0;
+    width: 200px;
+    height: 50px;
 }
+
 body > .navbar .brand:hover {
     text-decoration: none;
     text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.4);
 }
 
+.navbar .nav.pull-right {
+    margin-left: 10px;
+    margin-right: 0;
+    float: right;
+}
 
+.navbar .nav>li {
+    display: block;
+    float: left;
+}
+
+.nav-collapse.collapse {
+    height: auto !important;
+    overflow: visible !important;
+}
+
+.navbar .nav .active a:hover {
+    background: none;
+    color: #DDF7FC;
+}
+
+.navbar .nav .active>a, .navbar .nav .active>a:hover {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #e5e5e5;
+}
+
+.navbar .nav li a:hover {
+    color: #DDF7FC;
+}
+
+
+.wrap-blue {
+    padding: 80px 0;
+    color: #fff;
+    background-color: #a5cad6;
+}
+
+.wrap {
+    padding: 60px 0 120px;
+}
+
+.container{
+    width:100%;
+}
 /* Sections
 -------------------------------------------------- */
 
@@ -1074,13 +1119,29 @@ form.bs-docs-tip {
 .in_image{
     position:absolute;
     padding: 30px;
-    top:0px;
-    right:0px;
-    width:30%;
+    top:140px;
+    left:30px;
+    width:15%;
     color: white;
     font-size: 16px;
-    background-color: #808080;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; /*IE8*/
-    filter:alpha(opacity=80);  /* IE6，IE7*/
-    opacity: .8;  /*Opera9.0+，Firefox1.5+，Chrome*/
+    background-color: #dc3c00;
+}
+
+.in_image a{
+    color: #FFFFFE;
+}
+
+.ul-menu{
+    font-size: 20px;
+    list-style-type:none;
+    margin:0;
+}
+
+.ul-menu li{
+    padding-top:20px;
+}
+
+.feature {
+    width: 320px;
+    height: 180px;
 }

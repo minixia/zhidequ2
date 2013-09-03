@@ -1,80 +1,85 @@
-<header class="jumbotron">
-  <h1><%=@intro.title%> </h1>
-</header>
-<div class="row">
-  <div class="span2 bs-docs-sidebar">
-    <ul class="nav nav-list bs-docs-sidenav">
-      <%@intro.plan_intro_chapters.each do |chapter|%>
-        <%cities = chapter.plan_intro_sections.where(:section_type => ['城市','去程','回程'])%>
-        <li><a href="#chapter_<%=chapter.id%>"><i class="icon-chevron-right"></i>
-          <%=chapter.title%>
-          <%if(cities.length > 0)%>
-            [<%cities.each {|city|%><%=city.title%> <%}%>]
-          <%end%>
-        </a></li>
-      <%end%>
-    </ul>
-  </div>
-  <div class="span9">
-    <%@intro.plan_intro_chapters.each do |chapter|%>
-    <section id="chapter_<%=chapter.id%>">
-        <%city_sections = chapter.plan_intro_sections.where(:section_type => '城市')%>
-        <div class="page-header">
-            <h2>
-                <%=chapter.title%>
-              <%chapter.plan_intro_sections.where(:section_type => '提示').each do |tip|%>
-                  <a href="#" data-trigger="collapse" data-target="#tip_<%=tip.id%>">
-                    <small style="right: 0px;">
-                      <%=tip.title%>
-                    </small>
-                  </a>
-                  <div id="tip_<%=tip.id%>" class="bs-docs-tip collapsible hide" style="font-size: 16px;">
-                    <%==m2h tip.content%>
-                  </div>
-              <%end%>
-            </h2>
+<div class="wrap">
+  <div class="container">
+      <img src="/img/photos/plan_1/封面.jpg" width="100%"/>
+      <div class="in_image">
+        <h4>第一次去日本</h4>
+        <h3>关西九日自由行</h3>
+        <p>古迹 购物 公园 美食</p>
+        <a href="#">获取详细行程</a>
+      </div>
+    <div class="row" style="padding-top:30px;padding-left:40px;">
+        <div class="span2">
+          <h2>了解</h2>
+          <ul class="ul-menu">
+            <li><a href="#">为什么是关西</a></li>
+            <li><a href="#">不会日语?</a></li>
+            <li><a href="#">行程设计思路</a></li>
+            <li><a href="#">总体行程概览</a></li>
+            <li><a href="#">总体花费状况</a></li>
+            <li><a href="#">准备工作要做好</a></li>
+            <li><a href="#">详细的行程表</a></li>
+            <li><a href="#">美食！美食！</a></li>
+          </ul>
         </div>
-        <%if(city_sections.length > 0)%>
-            <div class="hero-unit">
-              <h4>
-                <%city_sections.each do |city| %>
-                <%= city.title %>
-                <%end%>
-              </h4>
-              <%city_sections.each do |city| %>
-                <p><%==m2h city.content%></p>
-              <%end%>
+        <div class="span10">
+          <h2>游览到</h2>
+          <div class="row-fluid">
+            <div class="span4">
+              <img src="/img/photos/plan_1/主行程/城市/大阪.jpg" class="feature">
+              <h4><a href="#">现代化大都市</a></h4>
             </div>
-        <%end%>
-        <%chapter.plan_intro_sections.where(:section_type => ['行程','去程','回程']).each do |section|%>
-        <div class="row" >
-          <div class="span9">
-            <h4>
-              <%= section.title %>
-              <%if(!section.duration.blank?)%>
-                  <span style="font-size: 14px;" class="text-info">预计游览时间：<%= section.duration%></span>
-              <%end%>
-            </h4>
-            <%if(section.image_url && !section.image_url.blank?)%>
-            <div class="image">
-              <img src="<%=section.image_url%>" width="100%">
-              <div class="in_image">
-                <%==m2h section.content%>
-              </div>
+            <div class="span4">
+              <img src="/img/photos/plan_1/主行程/文化遗产和古迹/清水寺.jpg" class="feature">
+              <h4><a href="#">文化遗产与古迹</a></h4>
             </div>
-            <%else%>
-              <span><%==m2h section.content%></span>
-            <%end%>
+            <div class="span4">
+              <img src="/img/photos/plan_1/主行程/近现代景点/北野异人馆.jpg" class="feature">
+              <h4><a href="#">近现代景点</a></h4>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span4">
+              <img src="/img/photos/plan_1/主行程/游乐园和公园/奈良公园.jpg" class="feature">
+              <h4><a href="#">特色游乐园和公园</a></h4>
+            </div>
+            <div class="span4">
+              <img src="/img/photos/plan_1/主行程/购物逛街/三宫站前商店街.jpg" class="feature">
+              <h4><a href="#">购物和逛街</a></h4>
+            </div>
+            <div class="span4">
+              <img src="/img/photos/plan_1/主行程/美食特别推荐/道乐.jpg" class="feature">
+              <h4><a href="#">各色美食</a></h4>
+            </div>
           </div>
         </div>
-          <%chapter.plan_intro_sections.where(:section_type => '行程建议', :title => section.title).each do |advice|%>
-              <h5>行程建议：</h5>
-              <div>
-                <p><%==m2h advice.content%></p>
-              </div>
-          <%end%>
-        <%end%>
-    </section>
-    <%end%>
+
+        <div class="offset2 span10">
+          <div class="row-fluid">
+            <div class="span4">
+                <h3>准备出发了</h3>
+                <ul class="ul-menu">
+                  <li><a href="#">旅行前3个月</a></li>
+                  <li><a href="#">旅行前1个月</a></li>
+                  <li><a href="#">必须了解的知识</a></li>
+                </ul>
+            </div>
+            <div class="span4">
+              <h3>抵达目的地</h3>
+              <ul class="ul-menu">
+                <li><a href="#">详细行程表</a></li>
+                <li><a href="#">全程小贴士</a></li>
+                <li><a href="#">就是爱美食</a></li>
+              </ul>
+            </div>
+            <div class="span4">
+              <h3>还有一些小问题</h3>
+              <ul class="ul-menu">
+                <li><a href="#">不会日语怎么办</a></li>
+                <li><a href="#">要买什么小礼物</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </div>
   </div>
 </div>

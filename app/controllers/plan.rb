@@ -11,6 +11,10 @@ ZhidequSite.controller :plan do
     end
   end
 
+  get '/:id/table' do
+    render '/plan/table'
+  end
+
   get '/new' do
     @plan = Plan.new()
     render '/plan/new_plan'
