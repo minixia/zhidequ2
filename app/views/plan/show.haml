@@ -1,4 +1,48 @@
-- form_for @plan, '/plan' do |f|
-    = f.error_messages
-    = f.text_field_block :title, :caption => "标题"
-    = f.text_area_block :summary, :caption => "简介"
+%div.wrap
+  %div.container
+    %img(src="/img/photos/plan_#{@plan.id}/#{@plan.img}" width="100%")
+    %a(href="/plan/#{@plan.id}/schedules")
+      %div.in_image
+        %h4= @plan.sub_title
+        %h3= @plan.title
+        %p= @plan.points
+        不用看了，直接出发！
+    %div.row(style="padding-top:30px;padding-left:40px;")
+      %div.span2
+        %h2 了解
+        %ul.ul-menu
+          - @plan.summaries.each do |summary|
+            %li
+              %a(href="#summary_#{summary.id}" data-toggle="modal")= summary.title
+            %div(id="summary_#{summary.id}" class="modal hide fade" tabindex="-1")
+              %div.modal-header
+                %h5= summary.title
+              %div.modal-body
+                = m2h(summary.content).html_safe
+      %div.span10
+        %div.row
+          - @plan.features.each do |feature|
+            %div.span3
+              %img.feature(src="/img/photos/plan_#{@plan.id}/#{feature.img}")
+              %h4
+                %a(href="/feature/#{feature.id}")= feature.title
+      %div(class="span10 offset2")
+        %div.row-fluid
+          %div.span3
+            %h3 准备出发了
+            - ['旅行前3个月', '旅行前1个月', '必须了解的知识'].each do |menu|
+              %ul.ul-menu
+                %li
+                  %a(href="#")= menu
+          %div.span3
+            %h3 抵达目的地
+            - ['详细行程表', '全程小贴士', '就是爱美食'].each do |menu|
+              %ul.ul-menu
+                %li
+                  %a(href="#")= menu
+          %div.span3
+            %h3 还有一些小问题
+            - ['不会日语怎么办', '能买什么小礼物'].each do |menu|
+              %ul.ul-menu
+                %li
+                  %a(href="#")= menu

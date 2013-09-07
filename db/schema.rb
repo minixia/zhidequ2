@@ -8,53 +8,120 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 4) do
+ActiveRecord::Schema.define(version: 9) do
 
-  create_table "plan_intro_chapters", :force => true do |t|
-    t.string   "title",         :null => false
-    t.string   "summary",       :null => false
-    t.string   "image_url"
-    t.integer  "order"
-    t.integer  "plan_intro_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
-  add_index "plan_intro_chapters", ["plan_intro_id"], :name => "index_plan_intro_chapters_on_plan_intro_id"
-
-  create_table "plan_intro_sections", :force => true do |t|
-    t.string   "title",                                     :null => false
-    t.text     "content",               :limit => 16777215, :null => false
-    t.string   "image_url"
-    t.string   "section_type"
-    t.string   "duration"
-    t.integer  "plan_intro_chapter_id"
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
-  end
-
-  add_index "plan_intro_sections", ["plan_intro_chapter_id"], :name => "index_plan_intro_sections_on_plan_intro_chapter_id"
-
-  create_table "plan_intros", :force => true do |t|
-    t.string   "title",      :null => false
-    t.string   "summary",    :null => false
-    t.string   "image_url"
+  create_table "checklists", force: true do |t|
+    t.string   "title"
+    t.string   "name"
+    t.text     "desc"
+    t.string   "img"
+    t.string   "category"
     t.integer  "plan_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "plan_intros", ["plan_id"], :name => "index_plan_intros_on_plan_id"
+  add_index "checklists", ["plan_id"], name: "index_checklists_on_plan_id", using: :btree
 
-  create_table "plans", :force => true do |t|
-    t.string   "title",          :null => false
-    t.string   "summary",        :null => false
-    t.string   "image_hero_url"
+  create_table "feature_details", force: true do |t|
+    t.string   "title",                       null: false
+    t.text     "content",    limit: 16777215, null: false
+    t.string   "img"
+    t.integer  "feature_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "feature_details", ["feature_id"], name: "index_feature_details_on_feature_id", using: :btree
+
+  create_table "features", force: true do |t|
+    t.string   "category",   null: false
+    t.string   "title",      null: false
+    t.string   "img"
+    t.integer  "order"
+    t.integer  "plan_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "features", ["plan_id"], name: "index_features_on_plan_id", using: :btree
+
+  create_table "fqas", force: true do |t|
+    t.string   "question"
+    t.text     "answer"
+    t.string   "category"
+    t.integer  "plan_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "fqas", ["plan_id"], name: "index_fqas_on_plan_id", using: :btree
+
+  create_table "plans", force: true do |t|
+    t.string   "title",      null: false
+    t.string   "sub_title",  null: false
     t.string   "points"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.string   "img"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
+
+  create_table "prepares", force: true do |t|
+    t.string   "phase"
+    t.string   "action"
+    t.text     "content"
+    t.integer  "plan_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "prepares", ["plan_id"], name: "index_prepares_on_plan_id", using: :btree
+
+  create_table "schedules", force: true do |t|
+    t.string   "day"
+    t.string   "action"
+    t.string   "path"
+    t.string   "start"
+    t.string   "traffic_fee"
+    t.string   "ticket_fee"
+    t.string   "play_time"
+    t.text     "desc"
+    t.string   "start_time"
+    t.string   "open_time"
+    t.string   "official_site"
+    t.string   "addr"
+    t.text     "food"
+    t.text     "shop"
+    t.string   "img"
+    t.text     "comment"
+    t.integer  "plan_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "schedules", ["plan_id"], name: "index_schedules_on_plan_id", using: :btree
+
+  create_table "summaries", force: true do |t|
+    t.string   "title",      null: false
+    t.text     "content",    null: false
+    t.integer  "plan_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "summaries", ["plan_id"], name: "index_summaries_on_plan_id", using: :btree
+
+  create_table "tips", force: true do |t|
+    t.string   "title",      null: false
+    t.string   "section"
+    t.text     "content"
+    t.integer  "plan_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tips", ["plan_id"], name: "index_tips_on_plan_id", using: :btree
 
 end

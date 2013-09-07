@@ -27,9 +27,10 @@ ZhidequSite.helpers do
 
   def m2h(content)
     if(content.nil?)
-      content == ""
+      content = ""
     end
-    RDiscount.new(content.gsub("\n", "\n\n"), :smart, :autolink, :filter_html).to_html()
+    result = RDiscount.new(content.gsub("\n", "\n\n"), :smart, :autolink, :filter_html).to_html()
+    return result.gsub(/_(.[^_]*)_/, '<span style="color:red">\1</span>')
   end
 
 end

@@ -1,0 +1,45 @@
+%div.container
+  .row
+    .span3
+      %div(class="bs-sidebar hidden-print affix" style="padding:20px" data-spy="affix" data-offset-top="200")
+        %ul(class="nav bs-sidenav")
+          - preday = ""
+          - @schedules.each do |s|
+            - if(preday != s.day)
+              - if(preday != "")
+                != "</ul></li>"
+              !="<li>"
+              - preday = s.day
+              %a(href="#sch_day_#{s.id}")= s.day
+              != '<ul class="nav">'
+            %li
+              %a(href="#sch_#{s.id}")= s.action
+    .span9
+      - preday = ""
+      - @schedules.each do |s|
+        - if preday != s.day
+          - preday = s.day
+          .page-header
+            %h3(id="sch_day_#{s.id}")= s.day
+        %h4(id="sch_#{s.id}")
+          = s.action
+          - if(s.start_time)
+            %small
+              出发时间：#{s.start_time}
+              - if(s.ticket_fee)
+                景区费用 #{s.ticket_fee}日元
+        %p= m2h(s.desc).html_safe
+        %h5 出发地：#{s.start}
+        - if(s.path)
+          %h5
+            交通路线
+            %small (#{s.traffic_fee}):
+          %p
+            = m2h(s.path).html_safe
+        - [['餐饮推荐',s.food], ['购物推荐', s.shop], ['小提示', s.comment]].each do |content|
+          - if(content[1])
+            %h5= content[0]
+            %p
+              = m2h(content[1]).html_safe
+
+

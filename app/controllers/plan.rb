@@ -1,37 +1,23 @@
 #encoding: utf-8
 
 ZhidequSite.controller :plan do
-  get '/:id/intro' do
+  layout :application
+
+  get '/:id' do
     @plan = Plan.find_by_id(params[:id])
     if @plan.blank?
       halt 404
     else
-      @intro = @plan.plan_intro
-      render 'plan/intro'
+      render 'plan/show'
     end
   end
 
-  get '/:id/table' do
-    render '/plan/table'
-  end
-
-  get '/new' do
-    @plan = Plan.new()
-    render '/plan/new_plan'
-  end
-
-  get '/:id' do
-    @plan = Plan.find_by_id(params[:id])
-    render '/plan/show'
-  end
-
-  post '/' do
-    @plan = Plan.new(params[:plan])
-    if @plan.save
-      flash[:notice] = '计划创建成功'
-      redirect url(:plan, :show, :id => @plan.id)
+  get :schedule, :map => '/plan/:id/schedules' do
+    @schedules = Schedule.where(plan_id: params[:id]).order(:id)
+    if @schedules.size == 0
+      halt 404
     else
-      render 'plan/new_plan'
+      render '/plan/schedule'
     end
   end
 

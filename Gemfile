@@ -14,11 +14,11 @@ gem 'haml'
 # Component requirements
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'erubis', '~> 2.7.0'
-gem 'activerecord', :require => 'active_record'
+gem 'activerecord', '~> 4.0', :require => 'active_record'
 gem 'mysql2'
 gem 'dalli', :require => 'active_support/cache/dalli_store'
 gem 'kgio'
-gem "second_level_cache", :git => "git://github.com/csdn-dev/second_level_cache.git"
+gem "second_level_cache", "~> 2.0.0.rc1"
 gem 'github-markdown', :require => 'github/markdown'
 gem 'will_paginate', :require => ['will_paginate/active_record', 'will_paginate/view_helpers/sinatra']
 gem 'sanitize'
@@ -39,11 +39,15 @@ group :development do
   gem 'pry-padrino'
   gem 'padrino-gen', '~> 0.11'
   gem 'thin'
+
+  #parse excel for import data
+  gem 'roo'
+  gem 'zip', :require => 'zip/zip'
 end
 
 # Test requirements
 group :test do
-  gem 'minitest', "~>2.6.0", :require => "minitest/autorun"
+  gem 'minitest'
   gem 'rack-test', :require => "rack/test"
   gem 'factory_girl'
   gem 'database_cleaner'

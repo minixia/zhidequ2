@@ -2,9 +2,9 @@ class CreatePlans < ActiveRecord::Migration
   def self.up
     create_table :plans do |t|
       t.string :title, :null => false
-      t.string :summary, :null =>false
-      t.string :image_hero_url
+      t.string :sub_title, :null =>false
       t.string :points
+      t.string :img
 
       t.timestamps
     end

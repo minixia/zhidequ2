@@ -13,6 +13,7 @@ class ZhidequSite < Padrino::Application
   end
 
   # layout  :my_layout            # Layout can be in views/layouts/foo.ext or views/foo.ext (default :application)
+  layout :application
 
   error ActiveRecord::RecordNotFound do
     halt 404
