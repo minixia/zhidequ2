@@ -1,20 +1,20 @@
 %div.container
   .row
     .span3
-      %div(class="bs-sidebar hidden-print affix" style="padding:20px" data-spy="affix" data-offset-top="200")
-        %ul(class="nav bs-sidenav")
+      %div(class="bs-sidebar hidden-print affix" data-spy="affix" id="sidebar")
+        %ul( class="nav bs-sidenav" data-spy="affix")
           - preday = ""
           - @schedules.each do |s|
             - if(preday != s.day)
               - if(preday != "")
                 != "</ul></li>"
-              !="<li>"
+              !='<li>'
               - preday = s.day
               %a(href="#sch_day_#{s.id}")= s.day
               != '<ul class="nav">'
             %li
               %a(href="#sch_#{s.id}")= s.action
-    .span9
+    %div(class="span9")
       - preday = ""
       - @schedules.each do |s|
         - if preday != s.day
@@ -41,5 +41,3 @@
             %h5= content[0]
             %p
               = m2h(content[1]).html_safe
-
-
