@@ -14,6 +14,7 @@ ZhidequSite.controller :plan do
 
   get :schedule, :map => '/plan/:id/schedules' do
     @schedules = Schedule.where(plan_id: params[:id]).order(:id)
+    @tips = Tip.where(plan_id: params[:id]).order(:id)
     if @schedules.size == 0
       halt 404
     else

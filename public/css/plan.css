@@ -1,0 +1,92 @@
+.main_bg {
+    background: #d4e5eb url("http://source.qunar.com/site/images/travel/finish/finish3nd/finish_bg.jpg") center top no-repeat;
+    width: 100%;
+    height: 100%;
+    clear: both;
+}
+
+.main_box {
+    background: #fff url("/img/shadow.jpg") right 0 repeat-y;
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.sidebar{
+    width: 100%;
+}
+
+.day {
+    padding-top: 5px;
+    background: url("/img/dayhdbg.png") repeat-x;
+}
+
+.day .period {
+    background: #effbfe;
+    height: 52px;
+    line-height: 50px;
+    text-align: center;
+    margin: 0px;
+}
+
+.b_poi_info {
+    padding-top: 36px;
+}
+
+.b_poi_info .top {
+    margin: 0 25px 12px;
+}
+
+.b_poi_info .top .type {
+    background: transparent url("/img/icons.png") -300px -300px no-repeat scroll;
+    font: 16px/30px "microsoft yahei",arial,sans-serif;
+    padding-left: 25px;
+    color: #333;
+}
+
+.b_poi_info .top h5 .location,.b_direct_fav .element_unit_type .location {
+    background-position:0 -40px;
+}
+
+.b_poi_info .top h5 .event,.m_expand .sort .bg_01,.m_expand .sort .bg_02,.b_direct_fav .element_unit_type .event {
+    background-position:0 -80px;
+}
+
+.b_poi_info .top h5 .hotel,.b_direct_fav .element_unit_type .hotel {
+    background-position:0 -120px;
+}
+
+.b_poi_info .top h5 .flight,.b_direct_fav .element_unit_type .flight {
+    background-position:0 -160px;
+}
+
+.b_poi_info .top h5 .car,.b_direct_fav .element_unit_type .car {
+    background-position:0 -200px;
+}
+
+.b_poi_info .top h5 .bus,.b_direct_fav .element_unit_type .bus {
+    background-position:0 -240px;
+}
+
+.b_poi_info .top h5 .train,.b_direct_fav .element_unit_type .train {
+    background-position:0 -280px;
+}
+
+.b_poi_info .top h5 .entertain,.b_direct_fav .element_unit_type .entertain {
+    background-position:0 -320px;
+}
+
+.b_poi_info .top h5 .food,.b_direct_fav .element_unit_type .food {
+    background-position:0 -360px;
+}
+
+.b_poi_info .top h5 .shopping,.b_direct_fav .element_unit_type .shopping {
+    background-position:0 -400px;
+}
+
+.b_poi_info .top h5 .wharf,.b_direct_fav .element_unit_type .wharf {
+    background-position:0 -440px;
+}
+
+.b_poi_info .top h5 .btn_fold,.b_comment_reply .q_box_r_author .selected {
+    background-position:5px -30px;
+}

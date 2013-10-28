@@ -1,7 +1,7 @@
-%div.container
+%div(class="container main_bg")
   .row
-    .span3
-      %div(class="bs-sidebar hidden-print affix" data-spy="affix" id="sidebar")
+    .span1
+      %div(class="bs-sidebar hidden-print affix sidebar" data-spy="affix" id="sidebar")
         %ul( class="nav bs-sidenav" data-spy="affix")
           - preday = ""
           - @schedules.each do |s|
@@ -14,12 +14,15 @@
               != '<ul class="nav">'
             %li
               %a(href="#sch_#{s.id}")= s.action
-    %div(class="span9")
+    %div(class="span7 main_box b_poi_info")
       - preday = ""
       - @schedules.each do |s|
         - if preday != s.day
+          - if preday != ""
+            !='</div>'
+          !='<div class="day top">'
           - preday = s.day
-          .page-header
+          .period
             %h3(id="sch_day_#{s.id}")= s.day
         %h4(id="sch_#{s.id}")
           = s.action
@@ -32,12 +35,26 @@
         %h5 出发地：#{s.start}
         - if(s.path)
           %h5
-            交通路线
+            %span(class="type bus")交通路线
             %small (#{s.traffic_fee}):
           %p
             = m2h(s.path).html_safe
-        - [['餐饮推荐',s.food], ['购物推荐', s.shop], ['小提示', s.comment]].each do |content|
+        - [['餐饮推荐',s.food, "type food"], ['购物推荐', s.shop, "type shopping"], ['小提示', s.comment]].each do |content|
           - if(content[1])
-            %h5= content[0]
+            %h5
+              %span(class="#{content[2]}")= content[0]
             %p
               = m2h(content[1]).html_safe
+      !='</div>'
+    %div.span4
+      - preday = ""
+      - @tips.each do |t|
+        - if preday != t.title
+          - if preday != ""
+            !='</div>'
+          !='<div class="day">'
+          - preday = t.title
+        %h4(id="tip_#{t.id}")
+          = t.section
+        %p= m2h(t.content).html_safe
+      !='</div>'

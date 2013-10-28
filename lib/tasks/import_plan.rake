@@ -90,5 +90,19 @@ namespace :import do
       schedule.save
       puts "schedule #{schedule.action} imported"
     end
+
+    #import tips
+    xls.default_sheet = xls.sheets[5]
+    Tip.where(plan_id: plan.id).delete_all
+    1.upto(xls.last_row) do |line|
+      tip = Tip.new
+      tip.plan = plan
+      tip.title = xls.cell(line, 'A');
+      tip.section = xls.cell(line, 'B');
+      tip.content = xls.cell(line, 'C');
+      tip.save
+      puts "tip #{tip.section} imported"
+    end
+
   end
 end

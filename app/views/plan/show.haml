@@ -36,10 +36,10 @@
                   %a(href="#")= menu
           %div.span3
             %h3 抵达目的地
-            - ['详细行程表', '全程小贴士', '就是爱美食'].each do |menu|
+            - [['详细行程表', "/plan/#{@plan.id}/schedules"], ['全程小贴士', '#'], ['就是爱美食', '#']].each do |menu|
               %ul.ul-menu
                 %li
-                  %a(href="#")= menu
+                  %a(href="#{menu[1]}")= menu[0]
           %div.span3
             %h3 还有一些小问题
             - ['不会日语怎么办', '能买什么小礼物'].each do |menu|
