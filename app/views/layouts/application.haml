@@ -8,15 +8,16 @@
   %head
     %meta{:content => "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}/
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
-    %meta{:content => "哪里值得去？尽在值得去！", :name => "description"}/
+    %meta{:content => "哪里值得去？尽在值得去！旅游达人歪脖为大家提供日本最专业旅游攻略下载。景点攻略、美食攻略、购物攻略、住宿交通攻略等应有尽有", :name => "description"}/
     %meta{:content => "值得去", :name => "author"}/
-    %meta{:content => "", :name => "keywords"}/
+    %meta{:content => "日本旅游，旅游问答,旅游攻略,旅游攻略下载游记下载,游记旅游日记,攻略下载", :name => "keywords"}/
     %meta{:content => "index,follow", :name => "robots"}/
     %meta{:content => "zhidequ.com", :name => "application-name"}/
     %link{:href => "/css/bootstrap.min.css", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "/css/bootstrap-responsive.min.css", :rel => "stylesheet"}/
     %link{:href => "/css/docs.css", :rel => "stylesheet"}/
-    %link{:href => "/css/plan.css", :rel => "stylesheet"}/
+    %link{:href => "/css/view.css", :rel => "stylesheet"}/
+    %link{:href => "/css/finish_view.css", :rel => "stylesheet"}/
     :css
       body{
           padding-top: 0;
@@ -34,7 +35,6 @@
           width: 38px; /* Width of image */
           background: url("/img/top.png") no-repeat;
       }
-      link{:href => "/css/google-code-prettify.css", :rel => "stylesheet"}/
     %link{:href => "/css/bootstro.min.css", :rel => "stylesheet"}/
     %link{:href => "/css/scojs.css", :rel => "stylesheet"}/
     / Le HTML5 shim, for IE6-8 support of HTML5 elements
@@ -44,6 +44,10 @@
       <link rel="stylesheet" type="text/css" href="/css/bootstrap-ie6.min.css">
 
       <link rel="stylesheet" type="text/css" href="/css/ie.css">
+      <script type="text/javascript" src="http://qunarzz.com/js/compatibilityUtils/build/DD_belatedPNG-min.js">
+      </script>
+      :javascript
+        DD_belatedPNG.fix('.pngfix');
     :javascript
       var _hmt = _hmt || [];
     %title 值得去
@@ -60,8 +64,7 @@
           %small 不会自助游，也能自由行
         %nav.nav-collapse.collapse{:role => "navigation"}
           %ul.nav.pull-right
-    .container
-      = yield
+    = yield
     /
       Footer
       \==================================================
@@ -93,6 +96,8 @@
     <![endif]-->
     %script{:src => "/js/google-code-prettify.js"}
     %script{:src => "/js/jquery.scrollUp.min.js"}
+    -#%script{:src => "/js/jquery.scrollspy.js"}
+    %script{:src => "/js/jquery.sticky-kit.min.js"}
     %script{:src => "/js/holder.js"}
     %script{:src => "/js/application.js"}
     :javascript
@@ -121,4 +126,54 @@
                 target: '.bs-sidebar',
                 offset: navHeight
               })
+
+          var in_area = false;
+          $(window).bind("scroll",function(){
+            go_in = false;
+            go_out = false;
+            var st = $(document).scrollTop();
+            if(st > 100){
+              if(!in_area){
+                in_area = true;
+                go_in = true;
+              }
+            }
+            if(st < 100){
+              if(in_area){
+                in_area = false;
+                go_out = true;
+              }
+            }
+            if(go_in){
+              $(".sticky").removeClass("hide");
+            }
+            if(go_out){
+              $(".sticky").addClass("hide");
+            }
+          });
+
+          var pages= {};
+          $('.e_main').each(function(i){
+            page = $(this);
+            pages[page[0].id] = page;
+            if(i == 0){
+              page.addClass("page_selected");
+            }else{
+              page.addClass("hide");
+            }
+          });
+
+          $(".tab").on('click', function(){
+            $this = $(this);
+            $this.addClass("active");
+            target_id = $this.attr("target");
+            selector = "#" + target_id;
+            $(".page_selected").addClass("hide");
+            page = $(selector);
+            page.removeClass("hide");
+            page.addClass("page_selected");
+            console.log(page.offset().top);
+            $(document).scrollTop(page.offset().top - 50);
+          });
+
       });

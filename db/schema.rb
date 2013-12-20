@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 9) do
+ActiveRecord::Schema.define(version: 10) do
 
   create_table "checklists", force: true do |t|
     t.string   "title"
@@ -59,6 +59,17 @@ ActiveRecord::Schema.define(version: 9) do
 
   add_index "fqas", ["plan_id"], name: "index_fqas_on_plan_id", using: :btree
 
+  create_table "intros", force: true do |t|
+    t.string   "title",      null: false
+    t.string   "section"
+    t.text     "content"
+    t.integer  "plan_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "intros", ["plan_id"], name: "index_intros_on_plan_id", using: :btree
+
   create_table "plans", force: true do |t|
     t.string   "title",      null: false
     t.string   "sub_title",  null: false
@@ -81,6 +92,7 @@ ActiveRecord::Schema.define(version: 9) do
 
   create_table "schedules", force: true do |t|
     t.string   "day"
+    t.string   "location"
     t.string   "action"
     t.string   "path"
     t.string   "start"

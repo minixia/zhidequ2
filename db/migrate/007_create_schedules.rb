@@ -2,6 +2,7 @@ class CreateSchedules < ActiveRecord::Migration
   def self.up
     create_table :schedules do |t|
       t.string :day
+      t.string :location
       t.string :action
       t.string :path
       t.string :start

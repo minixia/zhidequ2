@@ -1,60 +1,145 @@
-%div(class="container main_bg")
-  .row
-    .span1
-      %div(class="bs-sidebar hidden-print affix sidebar" data-spy="affix" id="sidebar")
-        %ul( class="nav bs-sidenav" data-spy="affix")
-          - preday = ""
+.q_skin
+  -# 跟屏行程条 start
+  %div(class="b_slide_nav sticky hide" id="b_slide_nav")
+    %div(class="e_slide_nav clrfix")
+      %div(class="m_tab_list js_nav_dests_con")
+        %ul.clrfix
+          - @locations.each do |loc|
+            %li(class="tab  js_city" target="loc_#{loc[:id]}")
+              %div.con
+                %a(hidefocus="on" class="place" href="javascript:;")
+                  %span.title
+                    = loc[:location]
+                  %b.color_focus
+                    = "第#{loc[:days] + 1}天"
+        %a(href="javascript:;" class="btn_arrows arrow_next ")
+  -# 跟屏行程条
+
+  -# 具体行程
+  %div(class="container")
+    %div.ct_bg
+      %div(class="b_ugc_operation clrfix" style="background-image:url(/img/photos/plan_#{@plan.id}/#{@plan.img})")
+        %div(class="left")
+          %div(class="e_author clrfix")
+            %div.text(style="color:white")
+              %h3.e_hd=@plan.title
+              %div.line_1
+                =@plan.sub_title
+              %div(class="line_2 clrfix")
+                =@plan.points
+    %div(class="main_box clrfix  sticky-parent")
+      .main_leftbox(id="js_mainleft")
+        .b_panel_schedule(id="b_panel_schedule")
+          - i=0;
+          - firstday = true
+          - i = i+1
           - @schedules.each do |s|
-            - if(preday != s.day)
-              - if(preday != "")
-                != "</ul></li>"
-              !='<li>'
-              - preday = s.day
-              %a(href="#sch_day_#{s.id}")= s.day
-              != '<ul class="nav">'
-            %li
-              %a(href="#sch_#{s.id}")= s.action
-    %div(class="span7 main_box b_poi_info")
-      - preday = ""
-      - @schedules.each do |s|
-        - if preday != s.day
-          - if preday != ""
-            !='</div>'
-          !='<div class="day top">'
-          - preday = s.day
-          .period
-            %h3(id="sch_day_#{s.id}")= s.day
-        %h4(id="sch_#{s.id}")
-          = s.action
-          - if(s.start_time)
-            %small
-              出发时间：#{s.start_time}
-              - if(s.ticket_fee)
-                景区费用 #{s.ticket_fee}日元
-        %p= m2h(s.desc).html_safe
-        %h5 出发地：#{s.start}
-        - if(s.path)
-          %h5
-            %span(class="type bus")交通路线
-            %small (#{s.traffic_fee}):
-          %p
-            = m2h(s.path).html_safe
-        - [['餐饮推荐',s.food, "type food"], ['购物推荐', s.shop, "type shopping"], ['小提示', s.comment]].each do |content|
-          - if(content[1])
-            %h5
-              %span(class="#{content[2]}")= content[0]
-            %p
-              = m2h(content[1]).html_safe
-      !='</div>'
-    %div.span4
-      - preday = ""
-      - @tips.each do |t|
-        - if preday != t.title
-          - if preday != ""
-            !='</div>'
-          !='<div class="day">'
-          - preday = t.title
-        %h4(id="tip_#{t.id}")
-          = t.section
-        %p= m2h(t.content).html_safe
-      !='</div>'
+            - if s.is_loc_start?
+              - if !firstday
+                !='</div>'
+                %div(id="quickenter" class="quickenter")
+                  %a(class="q_prev hide" href="javascript:;")
+                  - if(s.prev_loc)
+                    %span.q_now
+                      当前城市：
+                      =s.prev_loc.location
+                  %a(class="q_next tab" href="javascript:;" target="loc_#{s.id}")
+                    下一站：
+                    =s.location
+                !='</div>'
+              - loc_div = "<div class=\"e_main\" id=\"loc_#{s.id}\">"
+              !=loc_div
+            - if s.is_day_start?
+              - if !firstday && !s.is_loc_start?
+                !='</div>'
+              - day_div = "<div class=\"e_day\" id=\"sch_#{s.id}\">"
+              !=day_div
+              - firstday = false
+              %h4.period_hd
+                %span.day= s.day
+                %span.day= s.location
+            .period_ct
+              %div(class="b_poi_info b_expand_info")
+                - if(s.is_loc_start?)
+                  - if(@intros[s.day])
+                    .top
+                      %h3(style="font-size:15px;")
+                        = m2h(@intros[s.day].content).html_safe
+                    .bottom
+                      .ops
+                .top
+                  %h5
+                    %span(class="type event")
+                      =s.action
+                  %span.text
+                    = m2h(s.desc).html_safe
+                  - if(s.img)
+                    %div(class="img img1 clrfix")
+                      %img(src="/img/photos/plan_#{@plan.id}/详细行程/#{s.img}.jpg")
+                  -if s.path
+                    %h5
+                      %span(class="type bus")
+                        交通路线
+                    %span.text
+                      = m2h(s.path).html_safe
+                  - [['餐饮推荐',s.food, "type food"], ['购物推荐', s.shop, "type shopping"], ['小提示', s.comment]].each do |content|
+                    - if(content[1])
+                      %h5
+                        %span(class="#{content[2]}")= content[0]
+                      %p
+                        = m2h(content[1]).html_safe
+                .bottom
+                  .ops
+                    %div(class="inner clrfix")
+                      %span.left
+                      %span.right
+                        %a.comment(href="javascript:;") 评论
+  -# 具体行程
+
+-#%div(class="container main_bg")
+-#  .row
+-#    %div(class="span7 main_box b_poi_info")
+-#      - preday = ""
+-#      - @schedules.each do |s|
+-#        - if preday != s.day
+-#          - if preday != ""
+-#            !='</div>'
+-#          !='<div class="day top">'
+-#          - preday = s.day
+-#          .period
+-#            %h3(id="sch_day_#{s.id}")= s.day
+-#        %h4(id="sch_#{s.id}")
+-#          = s.action
+-#          - if(s.start_time)
+-#            %small
+-#              出发时间：#{s.start_time}
+-#              - if(s.ticket_fee)
+-#                景区费用 #{s.ticket_fee}日元
+-#        %p(class="text")= m2h(s.desc).html_safe
+-#        %h5 出发地：#{s.start}
+-#        - if(s.path)
+-#          %h5
+-#            %span(class="type bus")交通路线
+-#            %small (#{s.traffic_fee}):
+-#          %p
+-#            = m2h(s.path).html_safe
+-#        - [['餐饮推荐',s.food, "type food"], ['购物推荐', s.shop, "type shopping"], ['小提示', s.comment]].each do |content|
+-#          - if(content[1])
+-#            %h5
+-#              %span(class="#{content[2]}")= content[0]
+-#            %p
+-#              = m2h(content[1]).html_safe
+-#      !='</div>'
+-#    %div.span4
+-#      - preday = ""
+-#      - @tips.each do |t|
+-#        - if preday != t.title
+-#          - if preday != ""
+-#            !='</div>'
+-#          !='<div class="day">'
+-#          - preday = t.title
+-#        %h4(id="tip_#{t.id}")
+-#          = t.section
+-#        %p= m2h(t.content).html_safe
+-#      !='</div>'
+

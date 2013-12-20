@@ -61,32 +61,39 @@ namespace :import do
     xls.default_sheet = xls.sheets[3]
     Schedule.where(plan_id: plan.id).delete_all
     pre_day = ""
+    pre_location = ""
     2.upto(xls.last_row) do |line|
-      action = xls.cell(line, 'B')
+      location = xls.cell(line, 'B')
       schedule = Schedule.new
       schedule.plan = plan
-      schedule.action = action
       day = xls.cell(line, 'A')
       if(day.blank?)
         day = pre_day
       else
         pre_day = day
       end
+      if(location.blank?)
+        location = pre_location
+      else
+        pre_location = location
+      end
       schedule.day = day
-      schedule.start = xls.cell(line, 'C')
-      schedule.path = xls.cell(line, 'D')
-      schedule.traffic_fee = xls.cell(line, 'E')
-      schedule.ticket_fee = xls.cell(line, 'F')
-      schedule.play_time = xls.cell(line, 'G')
-      schedule.desc = xls.cell(line, 'H')
-      schedule.start_time = xls.cell(line, 'I')
-      schedule.open_time = xls.cell(line, 'J')
-      schedule.official_site = xls.cell(line, 'K')
-      schedule.addr = xls.cell(line, 'L')
-      schedule.food = xls.cell(line, 'M')
-      schedule.shop = xls.cell(line, 'N')
-      schedule.img = xls.cell(line, 'P')
-      schedule.comment = xls.cell(line, 'R')
+      schedule.location = location
+      schedule.action = xls.cell(line, 'C')
+      schedule.start = xls.cell(line, 'D')
+      schedule.path = xls.cell(line, 'E')
+      schedule.traffic_fee = xls.cell(line, 'F')
+      schedule.ticket_fee = xls.cell(line, 'G')
+      schedule.play_time = xls.cell(line, 'H')
+      schedule.desc = xls.cell(line, 'I')
+      schedule.start_time = xls.cell(line, 'J')
+      schedule.open_time = xls.cell(line, 'K')
+      schedule.official_site = xls.cell(line, 'L')
+      schedule.addr = xls.cell(line, 'M')
+      schedule.food = xls.cell(line, 'N')
+      schedule.shop = xls.cell(line, 'O')
+      schedule.img = xls.cell(line, 'Q')
+      schedule.comment = xls.cell(line, 'S')
       schedule.save
       puts "schedule #{schedule.action} imported"
     end
@@ -95,13 +102,30 @@ namespace :import do
     xls.default_sheet = xls.sheets[5]
     Tip.where(plan_id: plan.id).delete_all
     1.upto(xls.last_row) do |line|
-      tip = Tip.new
-      tip.plan = plan
-      tip.title = xls.cell(line, 'A');
-      tip.section = xls.cell(line, 'B');
-      tip.content = xls.cell(line, 'C');
-      tip.save
-      puts "tip #{tip.section} imported"
+      if(xls.cell(line, 'D') == '行程建议')
+        tip = Tip.new
+        tip.plan = plan
+        tip.title = xls.cell(line, 'A');
+        tip.section = xls.cell(line, 'B');
+        tip.content = xls.cell(line, 'C');
+        tip.save
+        puts "tip #{tip.section} imported"
+      end
+    end
+
+    #import intros
+    xls.default_sheet = xls.sheets[5]
+    Tip.where(plan_id: plan.id).delete_all
+    1.upto(xls.last_row) do |line|
+      if(xls.cell(line, 'D') == '城市')
+        intro = Intro.new
+        intro.plan = plan
+        intro.title = xls.cell(line, 'A');
+        intro.section = xls.cell(line, 'B');
+        intro.content = xls.cell(line, 'C');
+        intro.save
+        puts "intro #{intro.section} imported"
+      end
     end
 
   end

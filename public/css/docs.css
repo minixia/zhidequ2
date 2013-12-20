@@ -1232,3 +1232,11 @@ form.bs-docs-tip {
     width: 320px;
     height: 180px;
 }
+
+.avatar{
+    float: left;
+    display: inline;
+    width: 80px;
+    height: 80px;
+    position: relative;
+}
