@@ -2218,6 +2218,8 @@ input.focus::-webkit-input-placeholder {
     outline:0 none;
     resize:none;
     margin:0;
+    padding: 0 0;
+    -webkit-box-shadow:0;
 }
 
 .b_comment_reply .q_comment_box_textarea .success_tip {
@@ -2555,6 +2557,7 @@ input.focus::-webkit-input-placeholder {
     outline:0 none;
     resize:none;
     margin:0;
+    padding: 0;
 }
 
 .b_recent_comment .e_ct_r .textarea_box .success_tip {

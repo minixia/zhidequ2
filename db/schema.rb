@@ -10,7 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 10) do
+ActiveRecord::Schema.define(version: 22) do
+
+  create_table "accounts", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "crypted_password"
+    t.string   "role"
+    t.datetime "created_at"
+    t.string   "uid"
+    t.string   "provider",          limit: 20
+    t.integer  "comments_count",               default: 0, null: false
+    t.string   "logo"
+    t.string   "profile_url"
+    t.string   "profile_image_url"
+    t.string   "gender"
+    t.string   "user_type"
+  end
+
+  create_table "answers", force: true do |t|
+    t.text     "content"
+    t.integer  "votes"
+    t.integer  "question_id"
+    t.integer  "account_id"
+    t.datetime "reply_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "answers", ["account_id"], name: "index_answers_on_account_id", using: :btree
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
 
   create_table "checklists", force: true do |t|
     t.string   "title"
@@ -24,6 +53,19 @@ ActiveRecord::Schema.define(version: 10) do
   end
 
   add_index "checklists", ["plan_id"], name: "index_checklists_on_plan_id", using: :btree
+
+  create_table "comments", force: true do |t|
+    t.text     "content"
+    t.integer  "ref_id"
+    t.string   "ref_type"
+    t.datetime "comment_at"
+    t.integer  "account_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["account_id"], name: "index_comments_on_account_id", using: :btree
+  add_index "comments", ["ref_id"], name: "index_comments_on_ref_id", using: :btree
 
   create_table "feature_details", force: true do |t|
     t.string   "title",                       null: false
@@ -90,6 +132,46 @@ ActiveRecord::Schema.define(version: 10) do
 
   add_index "prepares", ["plan_id"], name: "index_prepares_on_plan_id", using: :btree
 
+  create_table "question_views", force: true do |t|
+    t.integer  "question_id"
+    t.string   "ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "question_views", ["ip"], name: "index_question_views_on_ip", using: :btree
+  add_index "question_views", ["question_id"], name: "index_question_views_on_question_id", using: :btree
+
+  create_table "questions", force: true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "views"
+    t.integer  "followers"
+    t.integer  "votes"
+    t.boolean  "verified",        default: true
+    t.boolean  "anonymously",     default: false
+    t.integer  "account_id"
+    t.datetime "asked_at"
+    t.datetime "last_voted_at"
+    t.datetime "last_reply_at"
+    t.datetime "last_changed_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "questions", ["account_id"], name: "index_questions_on_account_id", using: :btree
+  add_index "questions", ["asked_at"], name: "index_questions_on_asked_at", using: :btree
+  add_index "questions", ["title"], name: "index_questions_on_title", using: :btree
+  add_index "questions", ["votes"], name: "index_questions_on_votes", using: :btree
+
+  create_table "questions_tags", id: false, force: true do |t|
+    t.integer "question_id"
+    t.integer "tag_id"
+  end
+
+  add_index "questions_tags", ["question_id"], name: "index_questions_tags_on_question_id", using: :btree
+  add_index "questions_tags", ["tag_id"], name: "index_questions_tags_on_tag_id", using: :btree
+
   create_table "schedules", force: true do |t|
     t.string   "day"
     t.string   "location"
@@ -124,6 +206,34 @@ ActiveRecord::Schema.define(version: 10) do
   end
 
   add_index "summaries", ["plan_id"], name: "index_summaries_on_plan_id", using: :btree
+
+  create_table "tag_aliases", force: true do |t|
+    t.string   "tag_name"
+    t.string   "tag_alias"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tag_relations", force: true do |t|
+    t.string   "tag_src"
+    t.string   "tag_target"
+    t.string   "relation_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tags", force: true do |t|
+    t.string   "name"
+    t.string   "tag_type"
+    t.string   "summary"
+    t.string   "header_photo"
+    t.string   "wiki"
+    t.integer  "count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", using: :btree
 
   create_table "tips", force: true do |t|
     t.string   "title",      null: false

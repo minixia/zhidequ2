@@ -52,18 +52,26 @@
       var _hmt = _hmt || [];
     %title 值得去
   %body{"data-spy" => "scroll", "data-target" => ".bs-docs-sidebar"}
-    %header.navbar{:role => "banner"}
-      .container
-        %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
-          %span.icon-bar
-          %span.icon-bar
-          %span.icon-bar
-        %span/
-        %h1
-          值得去
-          %small 不会自助游，也能自由行
-        %nav.nav-collapse.collapse{:role => "navigation"}
-          %ul.nav.pull-right
+    -#%header.navbar{:role => "banner"}
+    -#  .container
+    -#    %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+    -#      %span.icon-bar
+    -#      %span.icon-bar
+    -#      %span.icon-bar
+    -#    %span/
+    -#    %h1
+    -#      值得去
+    -#      %small 不会自助游，也能自由行
+    -#    %nav.nav-collapse.collapse{:role => "navigation"}
+    -#      %ul.nav.pull-right
+    .site_header
+      .header_wrap
+        .user_img
+          %img{:alt => "website icon", :height => "80", :src => "/img/logo.jpg", :width => "80"}/
+        .blog_title 值得去
+        .write
+          %a{:href => "/login"} 登录
+        .blog_motto 不会自助游，也能自由行
     = yield
     /
       Footer
@@ -175,5 +183,10 @@
             console.log(page.offset().top);
             $(document).scrollTop(page.offset().top - 50);
           });
+
+          $(".js_expand_btn").on('click', function(){
+            target_id = "#" + $(this).attr("target");
+            $(target_id).toggle();
+          })
 
       });

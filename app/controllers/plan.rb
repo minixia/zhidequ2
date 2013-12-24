@@ -17,6 +17,7 @@ ZhidequSite.controller :plan do
     @schedules = Schedule.where(plan_id: params[:id]).order(:id)
     @tips = Tip.where(plan_id: params[:id]).order(:id)
     intro_records = Intro.where(plan_id: params[:id]).order(:id)
+    @questions = Question.all.limit(10)
     @intros = Hash.new
     intro_records.each do |intro|
       @intros[intro.title] = intro

@@ -32,8 +32,8 @@
         .b_panel_schedule(id="b_panel_schedule")
           - i=0;
           - firstday = true
-          - i = i+1
           - @schedules.each do |s|
+            - i = i+1
             - if s.is_loc_start?
               - if !firstday
                 !='</div>'
@@ -93,53 +93,79 @@
                     %div(class="inner clrfix")
                       %span.left
                       %span.right
-                        %a.comment(href="javascript:;") 评论
-  -# 具体行程
+                        %a.comment(href="javascript:;" class="js_expand_btn" target="comment_#{i}") 评论
+                  %div(class="b_comment_reply js_expandBox hide" id="comment_#{i}")
+                    %div.pic_triangle
+                    %div(class="q_box clrfix" style="border-top:0px none;")
+                      %div.q_box_l
+                        %img(width="35" height="35" src="/img/default_header.jpg" title="" alt="游客")
+                      %div.q_box_r
+                        %div(class="q_comment_box clrfix")
+                          %div(class="q_comment_box_textarea")
+                            %textarea(cols="5" rows="5" style="display: inline-block; color: rgb(213, 213, 213);" class="js_expendTextarea js_textarea" placeholder="有什么建议或评论，来说两句吧！（不超过300字）")
+                            %div(style="display:none")
+                          %div.q_comment_box_btn
+                            %a(href="#" class="btn_comment js_expendSubmit" data-beacon="Schedule_Comment_submit") 评 论
+  .main_rightbox
+    .b_stage_side.b_detail_list_side
+      / 右侧内容
+      .e_widget.e_new_action{:style => "position:relative; height:547px; overflow:hidden;"}
+        %h4{:style => "position:relative; z-index:2; background:#F5FBFB"} 相关的问题
+        .ct_list_bg
+          .ct_list_wrap.js_newsCoverageCon{:style => "height: 500px; overflow: hidden; position: relative; top: 0px; left: 0px; margin-top: 0px;"}
+            %ul.ct_list.js_newsCoverage
+              - @questions.each do |q|
+                %li.list
+                  .clrfix
+                    %p.des
+                      %a{:href => "/qa/#{q.id}", :target => "_blank"}= q.title
+          .ct_blank
 
--#%div(class="container main_bg")
--#  .row
--#    %div(class="span7 main_box b_poi_info")
--#      - preday = ""
--#      - @schedules.each do |s|
--#        - if preday != s.day
--#          - if preday != ""
--#            !='</div>'
--#          !='<div class="day top">'
--#          - preday = s.day
--#          .period
--#            %h3(id="sch_day_#{s.id}")= s.day
--#        %h4(id="sch_#{s.id}")
--#          = s.action
--#          - if(s.start_time)
--#            %small
--#              出发时间：#{s.start_time}
--#              - if(s.ticket_fee)
--#                景区费用 #{s.ticket_fee}日元
--#        %p(class="text")= m2h(s.desc).html_safe
--#        %h5 出发地：#{s.start}
--#        - if(s.path)
--#          %h5
--#            %span(class="type bus")交通路线
--#            %small (#{s.traffic_fee}):
--#          %p
--#            = m2h(s.path).html_safe
--#        - [['餐饮推荐',s.food, "type food"], ['购物推荐', s.shop, "type shopping"], ['小提示', s.comment]].each do |content|
--#          - if(content[1])
--#            %h5
--#              %span(class="#{content[2]}")= content[0]
--#            %p
--#              = m2h(content[1]).html_safe
--#      !='</div>'
--#    %div.span4
--#      - preday = ""
--#      - @tips.each do |t|
--#        - if preday != t.title
--#          - if preday != ""
--#            !='</div>'
--#          !='<div class="day">'
--#          - preday = t.title
--#        %h4(id="tip_#{t.id}")
--#          = t.section
--#        %p= m2h(t.content).html_safe
--#      !='</div>'
+
+  -# 评论
+  #b_recent_comment.b_recent_comment
+    %h3.e_hd 最新评论
+    %dl.e_ct.clrfix.js_commentbox
+      %dt.e_ct_l
+        %img{:alt => "游客", :height => "50", :src => "/img/default_header.jpg", :title => "", :width => "50"}
+          %span 游客
+      %dd.e_ct_r
+        .textarea_box
+          %textarea#input_0tdooer.PLACEHOLDER-INPUT{:cols => "", "data-placeholder" => "有什么建议或评论，来说两句吧！（不超过300字）", "data-placeholder-css" => "font-size:12px;", :name => "", :rows => ""}
+          %label#input_0tdooer_placeholder.PlaceHolder.PlaceHolder-for-textarea.PLACEHOLDER-LABEL{:for => "input_0tdooer", :style => "position: absolute; display: block; top: 4px; left: 5px; cursor: text; margin-left: 0px; margin-top: 0px; font-size: 12px;"} 有什么建议或评论，来说两句吧！（不超过300字）
+          .success_tip{:style => "display: none; position: absolute; left: 0; top: 5px"}
+            %b>
+            发表成功
+        .ops_btn
+          %span.info_error{:style => "display: none; color: rgb(85, 85, 85);"}
+            还可以输入
+            %span{:style => "color: #FF6600"}> 297
+            个字
+          %a.btn_comment.js_submit_comment{"data-beacon" => "tjpinglunbutton", :href => ""} 发表评论
+    .js_commentlist
+      .e_ct_list
+        %dl.e_ct.clrfix
+          %dt.e_ct_l
+            %a.js_user{:data => "130311358@qunar", "data-beacon" => "comment_user_name", :href => "http://travel.qunar.com/space/130311358@qunar", :target => "_blank"}
+              %img{:alt => "刘小维Emily", :height => "50", :src => "http://headshot.user.qunar.com/headshotsById/130311358.png?s", :title => "", :width => "50"}/
+          %dd.e_ct_r
+            .title
+              %a.author.js_user{:data => "130311358@qunar", "data-beacon" => "comment_user_name", :href => "http://travel.qunar.com/space/130311358@qunar", :target => "_blank"} 刘小维Emily
+              %span.gray 说
+            .summary 亲爱滴你好，很感谢你对我们活动的支持！我是去哪儿攻略运营的同学，欢迎加入去哪儿攻略核心用户QQ群，方便及时沟通！群号：286815341，还请申请的时候备注一下去哪儿昵称哦，多谢啦！
+        %dl.e_ct.clrfix
+          %dt.e_ct_l
+            %a.js_user{:data => "138711656@qunar", "data-beacon" => "comment_user_name", :href => "http://travel.qunar.com/space/138711656@qunar", :target => "_blank"}
+              %img{:alt => "dooa3711", :height => "50", :src => "http://headshot.user.qunar.com/headshotsById/138711656.png?s", :title => "", :width => "50"}/
+          %dd.e_ct_r
+            .title
+              %a.author.js_user{:data => "138711656@qunar", "data-beacon" => "comment_user_name", :href => "http://travel.qunar.com/space/138711656@qunar", :target => "_blank"} dooa3711
+              %span.gray 说
+            .summary 无需任何证明就可以搭去香港？
+      .e_op_link.ops_btn_check
+        %a{"data-beacon" => "Recommend_more", :href => "http://travel.qunar.com/travelbook/books/detail/ugc/1399724?view=comment", :target => "_blank"}
+          查看全部
+          %b> 2
+          条评论
+  -#评论
 

@@ -1,0 +1,52 @@
+.container
+  #area_stage.area_stage.clr_after{:style => "position: relative;"}
+    .b_detail_list
+      / 攻略标题
+      .b_panel_cover
+        .content
+          %dl.m_ueg.clrfix
+            %dt.avatar
+              %img{:alt => "#{@question.account.name}", :height => "35", :src => "#{@question.account.logo}", :width => "35"}
+            %dd.meta
+              %dl.author.clrfix
+                %dt
+                  %h3
+                    %b.js_title{:style => "font-size: 26px;"}= @question.title
+              .tt
+                =@question.account.name
+      #schedule_content.panel_schedule.area_panel
+        .panel_nav
+          %ul.nav.clr_after
+            %li
+              %a.js_tab.active{"data-beacon" => "Comment_tab", :href => "#", :ref => "comment"} 回答
+        .refresh_wrap.js_refreshWrap
+          .refresh_wrap.js_innerRefreshWrap
+            .refresh_wrap.js_selectRefreshWrap
+              %ul.b_show_list.b_recomment_list
+                -@question.answers.each do |answer|
+                  %li.e_show_list.js_item{"data-itemid" => "2386220"}
+                    %dl.clrfix
+                      %dt
+                        %img{:alt => "#{answer.account.name}", :height => "35", :src => "#{answer.account.logo}", :width => "35"}
+                      %dd
+                        .content.clrfix
+                          .title_box
+                            %a(href="javascript:;")
+                              =answer.account.name
+                          %p.para= answer.content
+                          .meta_bottom
+                            %a.reply.js_expand_reply{:href => "javascript:;"} 回复
+                          .js_replycontainer
+    .b_stage_side.b_detail_list_side
+      / 右侧内容
+      .e_widget.e_new_action{:style => "position:relative; height:547px; overflow:hidden;"}
+        %h4{:style => "position:relative; z-index:2; background:#F5FBFB"} 相关的问题
+        .ct_list_bg
+          .ct_list_wrap.js_newsCoverageCon{:style => "height: 500px; overflow: hidden; position: relative; top: 0px; left: 0px; margin-top: 0px;"}
+            %ul.ct_list.js_newsCoverage
+              - @related_questions.each do |q|
+                %li.list
+                  .clrfix
+                    %p.des
+                      %a{:href => "/qa/#{q.id}"}= q.title
+          .ct_blank

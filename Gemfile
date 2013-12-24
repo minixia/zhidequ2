@@ -25,6 +25,9 @@ gem 'sanitize'
 gem 'carrierwave', :require => ['carrierwave', 'carrierwave/orm/activerecord']
 gem 'mini_magick'
 gem 'rest-client'
+
+gem 'paperclip'
+
 #markdown
 gem 'rdiscount'
 

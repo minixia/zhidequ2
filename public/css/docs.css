@@ -1240,3 +1240,85 @@ form.bs-docs-tip {
     height: 80px;
     position: relative;
 }
+
+
+.q_ad {
+    background: 0 none;
+    width: 226px;
+    padding: 0 0 0 20px;
+}
+
+.q_ad_title {
+    font-size: 18px;
+    line-height: 27px;
+    border-top: #e6e5e2 1px solid;
+    margin-top: 20px;
+    padding: 15px 0 10px;
+    font-family: "microsoft yahei";
+    color: #666;
+}
+
+
+.q_ad_more {
+    font-size: 12px;
+    font-weight: normal;
+    font-family: tahoma,arial;
+    float: right;
+    line-height: 27px;
+    margin-top: 0;
+}
+
+.q_ad_info {
+    line-height: 16px;
+    float: left;
+    display: inline;
+    word-break: break-all;
+    word-wrap: break-word;
+    padding-top: 5px;
+}
+
+.site_header {
+    height: 150px;
+    background: #4c7298 url(/img/hd_bg.gif);
+}
+
+.site_header .header_wrap {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.site_header .user_img {
+    float: left;
+    margin: 30px 20px 0 0;
+}
+
+.site_header .blog_title {
+    color: #fff;
+    font-weight: bold;
+    font-size: 35px;
+    line-height: 35px;
+    padding-top: 40px;
+}
+
+.site_header .write {
+    float: right;
+    color: #fff;
+    text-align: right;
+}
+
+.site_header .write a {
+    color: #fff;
+    margin-left: 8px;
+    margin-right: 8px;
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    vertical-align: middle;
+    background: url(/img/y.png) 0px -240px no-repeat;
+    padding-left: 16px;
+}
+
+.site_header .blog_motto {
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+}
