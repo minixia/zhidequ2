@@ -182,6 +182,7 @@ namespace :import do
     Answer.delete_all
     4.upto(xls.last_row) do |line|
       q = Question.new
+      q.code = xls.cell(line, 'C')
       q.title = xls.cell(line, 'H')
       q.content = xls.cell(line, 'H')
       asker = askers[rand(0...askers.length)]
