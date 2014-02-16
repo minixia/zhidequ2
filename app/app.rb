@@ -8,7 +8,7 @@ class ZhidequSite < Padrino::Application
   mime_type :md, 'text/plain'
 
   get "/" do
-    status, headers, body = call env.merge("PATH_INFO" => '/home')
+    status, headers, body = call env.merge("PATH_INFO" => '/plan/1')
     [status, headers, body]
   end
 
