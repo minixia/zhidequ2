@@ -19,6 +19,7 @@ namespace :import do
     plan.sub_title = xls.cell(2, 'B')
     plan.points = xls.cell(2, 'C')
     plan.img = xls.cell(2, 'D')
+    plan.code = xls.cell(2,'E')
     plan.save
     puts "plan #{plan.title} imported"
 
@@ -37,6 +38,7 @@ namespace :import do
     #import feature
     xls.default_sheet = xls.sheets[2]
     Feature.where(plan_id: plan.id).destroy_all
+    feature = nil;
     1.upto(xls.last_row) do |line|
       feature_type = xls.cell(line, 'A')
       data_type = xls.cell(line, 'D')

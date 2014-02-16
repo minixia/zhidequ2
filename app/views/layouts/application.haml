@@ -18,6 +18,7 @@
     %link{:href => "/css/docs.css", :rel => "stylesheet"}/
     %link{:href => "/css/view.css", :rel => "stylesheet"}/
     %link{:href => "/css/finish_view.css", :rel => "stylesheet"}/
+    %link{:href => "/css/bootstrap-modal.css", :rel => "stylesheet"}
     :css
       body{
           padding-top: 0;
@@ -68,9 +69,12 @@
       .header_wrap
         .user_img
           %img{:alt => "website icon", :height => "80", :src => "/img/logo.jpg", :width => "80"}/
-        .blog_title 值得去
+        .blog_title
+          %a{:href => "/", :style => "color:white;"}
+            歪脖的值得去
         .write
           %a{:href => "/login"} 登录
+          %div 歪脖的旅游qq群：247497929
         .blog_motto 不会自助游，也能自由行
     = yield
     /
@@ -96,7 +100,8 @@
     %script{:src => "/js/jquery.unveil.min.js"}
     %script{:src => "/js/bootstrap.min.js"}
     %script{:src => "/js/bootstro.min.js"}
-    %script{:src => "/js/sco.collapse.js"}
+    %script{:src => "/js/bootstrap-modalmanager.js"}
+    %script{:src => "/js/bootstrap-modal.js"}
     /
       [if lte IE 6]>
       <!-- bsie js 补丁只在IE6中才执行
@@ -110,6 +115,9 @@
     %script{:src => "/js/application.js"}
     :javascript
       $(document).ready(function(){
+
+          $.fn.modalmanager.defaults.resize = true;
+
           $("img.lazy").unveil();
 
           $("#start-intro").click(function(){

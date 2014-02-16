@@ -68,24 +68,21 @@
                     .bottom
                       .ops
                 .top
-                  %h5
-                    %span(class="type event")
-                      =s.action
+                  %h5(class="type event")
+                    =s.action
                   %span.text
                     = m2h(s.desc).html_safe
                   - if(s.img)
                     %div(class="img img1 clrfix")
                       %img(src="/img/photos/plan_#{@plan.id}/详细行程/#{s.img}.jpg")
                   -if s.path
-                    %h5
-                      %span(class="type bus")
-                        交通路线
+                    %h5(class="type bus")
+                      交通路线
                     %span.text
                       = m2h(s.path).html_safe
                   - [['餐饮推荐',s.food, "type food"], ['购物推荐', s.shop, "type shopping"], ['小提示', s.comment]].each do |content|
                     - if(content[1])
-                      %h5
-                        %span(class="#{content[2]}")= content[0]
+                      %h5(class="#{content[2]}")= content[0]
                       %p
                         = m2h(content[1]).html_safe
                 .bottom

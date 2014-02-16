@@ -22,7 +22,7 @@
             .refresh_wrap.js_selectRefreshWrap
               %ul.b_show_list.b_recomment_list
                 -@question.answers.each do |answer|
-                  %li.e_show_list.js_item{"data-itemid" => "2386220"}
+                  %li.e_show_list
                     %dl.clrfix
                       %dt
                         %img{:alt => "#{answer.account.name}", :height => "35", :src => "#{answer.account.logo}", :width => "35"}
