@@ -47,6 +47,7 @@ namespace :import do
         feature.category =  feature_type
         feature.title = xls.cell(line, 'B')
         feature.img = xls.cell(line, 'C')
+        feature.img = feature.img.downcase unless feature.img.blank?
         feature.plan = plan
         feature.save
         puts "feature #{feature.title} imported"
