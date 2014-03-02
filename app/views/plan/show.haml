@@ -31,25 +31,25 @@
                 %h5= feature.title
               %div.modal-body
                 -feature.feature_details.each do |detail|
-                  %h3= detail.title
+                  %h3.header= detail.title
                   %div= m2h(detail.content).html_safe
-    %div(class="span10 offset2")
-      %div.row-fluid
-        %div.span3
-          %h3 准备出发了
-          - ['旅行前3个月', '旅行前1个月', '必须了解的知识'].each do |menu|
-            %ul.ul-menu
-              %li
-                %a(href="#")= menu
-        %div.span3
-          %h3 抵达目的地
-          - [['详细行程表', "/plan/#{@plan.id}/schedules"], ['全程小贴士', '#'], ['就是爱美食', '#']].each do |menu|
-            %ul.ul-menu
-              %li
-                %a(href="#{menu[1]}")= menu[0]
-        %div.span3
-          %h3 还有一些小问题
-          - ['不会日语怎么办', '能买什么小礼物'].each do |menu|
-            %ul.ul-menu
-              %li
-                %a(href="#")= menu
+    -#%div(class="span10 offset2")
+    -#  %div.row-fluid
+    -#    %div.span3
+    -#      %h3 准备出发了
+    -#      - ['旅行前3个月', '旅行前1个月', '必须了解的知识'].each do |menu|
+    -#        %ul.ul-menu
+    -#          %li
+    -#            %a(href="#")= menu
+    -#    %div.span3
+    -#      %h3 抵达目的地
+    -#      - [['详细行程表', "/plan/#{@plan.id}/schedules"], ['全程小贴士', '#'], ['就是爱美食', '#']].each do |menu|
+    -#        %ul.ul-menu
+    -#          %li
+    -#            %a(href="#{menu[1]}")= menu[0]
+    -#    %div.span3
+    -#      %h3 还有一些小问题
+    -#      - ['不会日语怎么办', '能买什么小礼物'].each do |menu|
+    -#        %ul.ul-menu
+    -#          %li
+    -#            %a(href="#")= menu

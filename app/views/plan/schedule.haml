@@ -5,7 +5,7 @@
       %div(class="m_tab_list js_nav_dests_con")
         %ul.clrfix
           - @locations.each do |loc|
-            %li(class="tab  js_city" target="loc_#{loc[:id]}")
+            %li(class="tab  js_city" data-target="loc_#{loc[:id]}")
               %div.con
                 %a(hidefocus="on" class="place" href="javascript:;")
                   %span.title
@@ -43,7 +43,7 @@
                     %span.q_now
                       当前城市：
                       =s.prev_loc.location
-                  %a(class="q_next tab" href="javascript:;" target="loc_#{s.id}")
+                  %a(class="q_next tab" href="javascript:;" data-target="loc_#{s.id}")
                     下一站：
                     =s.location
                 !='</div>'
@@ -90,7 +90,7 @@
                     %div(class="inner clrfix")
                       %span.left
                       %span.right
-                        %a.comment(href="javascript:;" class="js_expand_btn" target="comment_#{i}") 评论
+                        %a.comment(href="javascript:;" class="js_expand_btn" data-target="comment_#{i}") 评论
                   %div(class="b_comment_reply js_expandBox hide" id="comment_#{i}")
                     %div.pic_triangle
                     %div(class="q_box clrfix" style="border-top:0px none;")

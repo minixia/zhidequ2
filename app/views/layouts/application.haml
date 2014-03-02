@@ -182,7 +182,7 @@
           $(".tab").on('click', function(){
             $this = $(this);
             $this.addClass("active");
-            target_id = $this.attr("target");
+            target_id = $this.attr("data-target");
             selector = "#" + target_id;
             $(".page_selected").addClass("hide");
             page = $(selector);
@@ -193,7 +193,7 @@
           });
 
           $(".js_expand_btn").on('click', function(){
-            target_id = "#" + $(this).attr("target");
+            target_id = "#" + $(this).attr("data-target");
             $(target_id).toggle();
           })
 

@@ -30,7 +30,9 @@ ZhidequSite.helpers do
       content = ""
     end
     result = RDiscount.new(content.gsub("\n", "\n\n"), :smart, :autolink, :filter_html).to_html()
-    return result.gsub(/_([^_]*)_/, '<span style="color:red">\1</span>')
+    result = result.gsub(/\^([^\^]*)\^/, '<span style="color:red">\1</span>')
+    result = result.gsub(/<a/, '<a target="_blank"')
+    return result
   end
 
 end
