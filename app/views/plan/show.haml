@@ -18,6 +18,8 @@
               %h5= summary.title
             %div.modal-body
               = m2h(summary.content).html_safe
+        %li
+          %a(href="/plan/#{@plan.id}/schedules") 详细行程
     %div.span10
       %div.row
         - @plan.features.each do |feature|
